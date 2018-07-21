@@ -1,6 +1,7 @@
 package com.base.springboot;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -8,9 +9,11 @@ import org.springframework.cache.annotation.EnableCaching;
 /***
  * 1.MapperScan配置扫描接口的位置
  * 2.EnableCaching 开启基于注解的缓存
+ * 3.EnableRabbit 开启消息注解(监听)
  */
 @MapperScan("com.base.springboot.mapper")
 @EnableCaching
+@EnableRabbit
 @SpringBootApplication
 public class SpringbootApplication {
 

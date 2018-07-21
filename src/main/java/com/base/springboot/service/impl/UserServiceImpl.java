@@ -3,11 +3,14 @@ package com.base.springboot.service.impl;
 import com.base.springboot.mapper.UserDao;
 import com.base.springboot.model.UserVO;
 import com.base.springboot.service.UserService;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,5 +29,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserVO> getList() {
         return userDao.getList();
+    }
+
+
+    @RabbitListener(queues = "test.direct.queues")
+    public void messageRecive(Map<String,String> map) {
+        System.out.println("收到消息："+map);
+    }
+
+    @RabbitListener(queues = "test.direct.queues1")
+    public void messageRecive1(Message message) {
+        System.out.println("收到消息："+message.getBody());
+        System.out.println("收到消息："+message.getMessageProperties());
     }
 }
