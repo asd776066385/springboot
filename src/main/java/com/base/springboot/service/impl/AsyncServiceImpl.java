@@ -1,6 +1,7 @@
 package com.base.springboot.service.impl;
 
 import com.base.springboot.service.AsyncService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -11,6 +12,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class AsyncServiceImpl implements AsyncService {
 
+    /**
+     * @Async 让spring 自己开异步线程
+     */
+    @Async
     public void execTask(){
         System.out.println("进入任务。。。。。");
         try {
